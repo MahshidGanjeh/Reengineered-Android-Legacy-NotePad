@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.android.notepad;
+package com.example.android.notepad.ui;
 
 import android.app.Activity;
 import android.content.ContentValues;
@@ -24,10 +24,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import com.example.android.notepad.R;
+
 /**
  * This Activity allows the user to edit a note's title. It displays a floating window
  * containing an EditText.
- *
+ * <p>
  * NOTE: Notice that the provider operations in this Activity are taking place on the UI thread.
  * This is not a good practice. It is only done here to make the code more readable. A real
  * application should use the {@link android.content.AsyncQueryHandler}
@@ -40,11 +42,6 @@ public class TitleEditor extends Activity {
      */
     public static final String EDIT_TITLE_ACTION = "com.android.notepad.action.EDIT_TITLE";
 
-    // Creates a projection that returns the note ID and the note contents.
-    private static final String[] PROJECTION = new String[] {
-            NotePad.Notes._ID, // 0
-            NotePad.Notes.COLUMN_NAME_TITLE, // 1
-    };
 
     // The position of the title column in a Cursor returned by the provider.
     private static final int COLUMN_INDEX_TITLE = 1;
@@ -82,13 +79,13 @@ public class TitleEditor extends Activity {
          * android.content.AsyncQueryHandler or android.os.AsyncTask.
          */
 
-        mCursor = managedQuery(
+      /*  mCursor = managedQuery(
             mUri,        // The URI for the note that is to be retrieved.
             PROJECTION,  // The columns to retrieve
             null,        // No selection criteria are used, so no where columns are needed.
             null,        // No where columns are used, so no where values are needed.
             null         // No sort order is needed.
-        );
+        );*/
 
         // Gets the View ID for the EditText box
         mText = (EditText) this.findViewById(R.id.title);
@@ -97,7 +94,7 @@ public class TitleEditor extends Activity {
     /**
      * This method is called when the Activity is about to come to the foreground. This happens
      * when the Activity comes to the top of the task stack, OR when it is first starting.
-     *
+     * <p>
      * Displays the current title for the selected note.
      */
     @Override
@@ -119,13 +116,13 @@ public class TitleEditor extends Activity {
 
     /**
      * This method is called when the Activity loses focus.
-     *
+     * <p>
      * For Activity objects that edit information, onPause() may be the one place where changes are
      * saved. The Android application model is predicated on the idea that "save" and "exit" aren't
      * required actions. When users navigate away from an Activity, they shouldn't have to go back
      * to it to complete their work. The act of going away should save everything and leave the
      * Activity in a state where Android can destroy it if necessary.
-     *
+     * <p>
      * Updates the note with the text currently in the text box.
      */
     @Override
@@ -141,7 +138,7 @@ public class TitleEditor extends Activity {
             ContentValues values = new ContentValues();
 
             // In the values map, sets the title to the current contents of the edit box.
-            values.put(NotePad.Notes.COLUMN_NAME_TITLE, mText.getText().toString());
+            // values.put(NotePad.Notes.COLUMN_NAME_TITLE, mText.getText().toString());
 
             /*
              * Updates the provider with the note's new title.
@@ -152,10 +149,10 @@ public class TitleEditor extends Activity {
              * android.content.AsyncQueryHandler or android.os.AsyncTask.
              */
             getContentResolver().update(
-                mUri,    // The URI for the note to update.
-                values,  // The values map containing the columns to update and the values to use.
-                null,    // No selection criteria is used, so no "where" columns are needed.
-                null     // No "where" columns are used, so no "where" values are needed.
+                    mUri,    // The URI for the note to update.
+                    values,  // The values map containing the columns to update and the values to use.
+                    null,    // No selection criteria is used, so no "where" columns are needed.
+                    null     // No "where" columns are used, so no "where" values are needed.
             );
 
         }

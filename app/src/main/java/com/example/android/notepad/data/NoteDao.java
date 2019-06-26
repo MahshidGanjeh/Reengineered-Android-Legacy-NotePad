@@ -7,6 +7,8 @@ import android.arch.persistence.room.Update;
 
 import com.example.android.notepad.data.model.Note;
 
+import java.util.List;
+
 @Dao
 public interface NoteDao {
 
@@ -17,7 +19,7 @@ public interface NoteDao {
     void updateUser(Note note);
 
     @Query("SELECT * from note")
-    Note getNote();
+    List<Note> getNote();
 
     @Query("SELECT title from note")
     String getNoteTitleFromDatabase();
