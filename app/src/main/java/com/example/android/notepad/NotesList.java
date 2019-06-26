@@ -54,9 +54,6 @@ public class NotesList extends ListActivity {
     // For logging and debugging
     private static final String TAG = "NotesList";
 
-    /**
-     * The columns needed by the cursor adapter
-     */
     private static final String[] PROJECTION = new String[] {
             NotePad.Notes._ID, // 0
             NotePad.Notes.COLUMN_NAME_TITLE, // 1
@@ -295,7 +292,7 @@ public class NotesList extends ListActivity {
      * @param menu A ContexMenu object to which items should be added.
      * @param view The View for which the context menu is being constructed.
      * @param menuInfo Data associated with view.
-     * @throws ClassCastException
+
      */
     @Override
     public void onCreateContextMenu(ContextMenu menu, View view, ContextMenuInfo menuInfo) {
@@ -355,7 +352,7 @@ public class NotesList extends ListActivity {
      * @param item The selected menu item
      * @return True if the menu item was DELETE, and no default processing is need, otherwise false,
      * which triggers the default handling of the item.
-     * @throws ClassCastException
+     *
      */
     @Override
     public boolean onContextItemSelected(MenuItem item) {
